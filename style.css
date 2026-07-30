@@ -5,13 +5,59 @@
     user-select: none;
 }
 canvas {
+    position: fixed;
+    top: -5vh;
+    left: -5vw;
+    width: 110vw;
+    height: 110vh;
     background-color: black;
     display: block;
+    transition: filter 0.5s ease;
+}
+canvas.blurred{
+    filter: blur(5px);
+}
+#welcome{
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+#welcome h1{
+    font-size: 72px;
+    margin: 30px;
+    font-family: Verdana, sans-serif;
+    letter-spacing: 5px;
+}
+#welcome p{
+    font-size: 16px;
+    font-family: Verdana, sans-serif;
+    line-height: 25px;
+}
+#startButton{
+    font-size: 24px;
+    padding: 15px;
+    margin: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(80, 80, 90, 0.65);
+    color: white;
+    font-variant: small-caps;
+}
+#startButton:hover{
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 35px rgba(255, 255, 255, 0.3);
+    background-color: rgba(80, 80, 90, 0.8);
+    cursor: pointer;
 }
 #menuButton {
+    display: none;
     position: fixed;
     top: 20px;
     left: 20px;
@@ -39,7 +85,7 @@ canvas {
     top: 20px;
     left: -320px;
     width: 300px;
-    height: 420px;
+    height: 75vh;
     background-color: rgba(80, 80, 90, 0.65);
     color: white;
     border-radius: 20px;
@@ -47,6 +93,7 @@ canvas {
     transition: left 0.3s ease;
     z-index: 99;
     text-align: center;
+    overflow-y: auto;
 }
 #sidebar.open {
     left: 20px;
@@ -62,7 +109,7 @@ canvas {
 }
 
 #sidebar h2 {
-    margin: 10px 0 30px;
+    margin: 15px 0 15px;
     font-size: 28px;
     text-align: center;
     color: rgba(255, 255, 255, 0.8);
@@ -73,7 +120,7 @@ canvas {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-size: 16px;
     color: #ddd;
 }
@@ -89,19 +136,30 @@ canvas {
     outline: none;
     font-size: 15px;
 }
-#minSize,
-#maxSize {
-    width: 30%;
-    display: inline-block;
+#minSize{
     margin-bottom: 15px !important;
 }
 .size.inputs {
     display: flex;
     gap: 10px;
 }
+#sidebar select{
+    width: 75%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    cursor: pointer;
+}
 #regenerateButton {
     width: 150px;
     height: 50px;
+    margin-top: 10px;
     font-size: 16px;
     font-weight: bold;
     border-radius: 10px;

@@ -1,17 +1,21 @@
 const canvas = document.querySelector('canvas');
+const startButton = document.getElementById('startButton');
+const welcome = document.getElementById('welcome');
 const menuButton = document.getElementById('menuButton');
 const sidebar = document.getElementById('sidebar');
 const starCount = document.getElementById('starCount');
 const minSize = document.getElementById('minSize');
 const maxSize = document.getElementById('maxSize');
 const regenerateButton = document.getElementById('regenerateButton');
+const rotationSpeed = document.getElementById('rotationSpeed');
+const graphics = document.getElementById('graphics');
 
-//Star generation
+var ctx = canvas.getContext('2d');
+
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    generateStars();
+    init();
 }
 
 function getRandom(min, max) {
@@ -32,48 +36,105 @@ function randomColor() {
     }
 }
 
-var ctx = canvas.getContext('2d');
-let resizeTimeout;
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-function generateStars(){
-    //clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //limiting
-    if (starCount.value > 10000){
-        starCount.textContent = 10000;
-        starCount.value = 10000;
-    }
-    if (maxSize.value != "" && minSize.value > maxSize.value){
-        minSize.textContent = maxSize.textContent;
-        minSize.value = maxSize.value;
+let stars = [];
+class Star{
+    constructor(x, y, radius, color){
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = randomColor();
     }
 
-    //rendering each star
-    for (let i = 0; i < starCount.value; i++){
+    draw() {
         ctx.beginPath();
-
-        ctx.arc(getRandom(0, window.innerWidth),
-                getRandom(0, window.innerHeight),
-                getRandom(+minSize.value, +maxSize.value),
-                0,
-                Math.PI * 2,
-            );
-
-        ctx.fillStyle = randomColor();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        if (graphics.value != "fast"){
+            ctx.shadowColor= this.color;
+            ctx.shadowBlur = 10;
+        }
+        ctx.fillStyle = this.color;
         ctx.fill();
+        ctx.closePath();
+    }
+
+    update(){
+        this.draw();
     }
 }
 
-generateStars();
-starCount.addEventListener("keyup", generateStars);
-minSize.addEventListener("keyup", generateStars);
-maxSize.addEventListener("keyup", generateStars);
-regenerateButton.addEventListener("click", ()=>{
-    generateStars();
+function init(){
+    limitSettings();
+
+    stars = [];
+
+    ctx.fillStyle = 'rgba(10, 10, 10, 1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < starCount.value; i++){
+        const x = getRandom(-((window.innerWidth + 500)/2), (window.innerWidth + 500)/2);
+        const y = getRandom(-((window.innerHeight + 1200)/2), (window.innerHeight + 1200)/2)
+        const r = getRandom(+minSize.value, +maxSize.value)
+
+        stars.push(new Star(x, y, r));
+    }
+}
+
+let radians = 0;
+function animate(){
+    requestAnimationFrame(animate);
+    let alpha;
+    if (graphics.value == "glow"){ alpha = 0.1; }
+    else{ alpha = 1; }
+
+    ctx.fillStyle = `rgba(10, 10, 10, ${alpha})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    ctx.save()
+    ctx.translate(canvas.width / 2, canvas.height / 2)
+    ctx.rotate(radians);
+    stars.forEach((star) => {
+        star.update();
+    })
+    ctx.restore();
+    radians += +rotationSpeed.value;
+}
+
+function limitSettings(){
+    if (starCount.value > 10000){
+        starCount.textContent = 10000;
+        starCount.value = 10000;
+        }
+    if (maxSize.value != "" && minSize.value > maxSize.value){
+        minSize.textContent = maxSize.textContent;
+        minSize.value = maxSize.value;
+    }   
+    if (maxSize.value > 5){
+        maxSize.textContent = 5;
+        maxSize.value = 5
+    }   
+}
+
+init();
+animate();
+
+//Welcome screen
+canvas.classList.add("blurred");
+startButton.addEventListener("click", ()=>{
+    welcome.style.display = "none";
+    canvas.classList.remove("blurred");
+    menuButton.style.display = "block";
 })
+
+starCount.addEventListener("keyup", init);
+minSize.addEventListener("keyup", init);
+maxSize.addEventListener("keyup", init);
+
+regenerateButton.addEventListener("click", ()=>{
+    init();
+})
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 //Settings
 menuButton.addEventListener("click", ()=>{
@@ -87,3 +148,4 @@ menuButton.addEventListener("click", ()=>{
         menuButton.textContent = ">"
     }
 })
+

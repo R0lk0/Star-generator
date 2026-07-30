@@ -9,6 +9,12 @@
 <body>
     <canvas></canvas>
 
+    <div id="welcome">
+        <h1>WELCOME!</h1>
+        <p>This is a random generated star simulation. Please note that your PC might not handle the heavier renderings. Otherwise have fun!</p>
+        <button id="startButton">Start simulation</button>
+    </div>
+
     <button id="menuButton">></button>
 
     <div id="sidebar">
@@ -23,6 +29,22 @@
                 <input type="number" id="minSize" placeholder="min" value="0.2" min="0" max="5" step="0.1">
                 <input type="number" id="maxSize" placeholder="max" value="2.5" min="0" max="5" step="0.1">
             </div>
+        </label>
+        <label>
+            Animation
+            <select id="rotationSpeed">
+                <option value="0">none</option>
+                <option value="0.0005" selected="true">slow</option>
+                <option value="0.003">fast</option>
+            </select>
+        </label>
+        <label>
+            Graphics
+            <select id="graphics">
+                <option value="fast">fast</option>
+                <option value="fancy" selected="true">fancy</option>
+                <option value="glow">glow</option>
+            </select>
         </label>
         <button id="regenerateButton">Regenerate</button>
     </div>
