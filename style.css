@@ -32,11 +32,19 @@ canvas.blurred{
     margin: 30px;
     font-family: Verdana, sans-serif;
     letter-spacing: 5px;
+    text-shadow:
+        0 0 4px rgba(255, 255, 255, 0.8),
+        0 0 8px rgba(255, 255, 255, 0.5),
+        0 0 12px rgba(255, 255, 255, 0.3);
 }
 #welcome p{
     font-size: 16px;
     font-family: Verdana, sans-serif;
     line-height: 25px;
+    text-shadow:
+        0 0 1px rgba(255, 255, 255, 0.8),
+        0 0 2px rgba(255, 255, 255, 0.5),
+        0 0 4px rgba(255, 255, 255, 0.3);
 }
 #startButton{
     font-size: 24px;
@@ -44,7 +52,7 @@ canvas.blurred{
     margin: 30px;
     border-radius: 10px;
     border: none;
-    background-color: rgba(80, 80, 90, 0.65);
+    background-color: rgba(80, 80, 90, 0.20);
     color: white;
     font-variant: small-caps;
 }
@@ -71,6 +79,10 @@ canvas.blurred{
     background-color: rgba(80, 80, 90, 0.65);
     color: white;
     transition: left 0.3s ease;
+    text-shadow:
+        0 0 1px rgba(255, 255, 255, 0.8),
+        0 0 2px rgba(255, 255, 255, 0.5),
+        0 0 4px rgba(255, 255, 255, 0.3);
 }
 #menuButton:hover {
     box-shadow:
@@ -115,6 +127,10 @@ canvas.blurred{
     color: rgba(255, 255, 255, 0.8);
     letter-spacing: 2px;
     text-decoration: underline;
+    text-shadow:
+        0 0 1px rgba(255, 255, 255, 0.8),
+        0 0 2px rgba(255, 255, 255, 0.5),
+        0 0 4px rgba(255, 255, 255, 0.3);
 }
 #sidebar label {
     display: flex;
