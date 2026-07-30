@@ -12,18 +12,19 @@
     <button id="menuButton">></button>
 
     <div id="sidebar">
-        <h2>Settings</h2>
+        <h2>Options</h2>
         <label>
             Amount
-            <input type="text" id="starCount" value="2000"> 
+            <input type="number" id="starCount" value="2000" > 
         </label>
         <label>
             Size
             <div class="size-inputs">
-                <input type="text" id="minSize" placeholder="min" value="0.2">
-                <input type="text" id="maxSize" placeholder="max" value="2.5">
+                <input type="number" id="minSize" placeholder="min" value="0.2">
+                <input type="number" id="maxSize" placeholder="max" value="2.5">
             </div>
         </label>
+        <button id="regenerateButton">Regenerate</button>
     </div>
 
     <script src="script.js"></script>

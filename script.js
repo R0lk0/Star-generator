@@ -4,6 +4,7 @@ const sidebar = document.getElementById('sidebar');
 const starCount = document.getElementById('starCount');
 const minSize = document.getElementById('minSize');
 const maxSize = document.getElementById('maxSize');
+const regenerateButton = document.getElementById('regenerateButton');
 
 //Star generation
 canvas.width = window.innerWidth;
@@ -30,8 +31,24 @@ function randomColor() {
 var ctx = canvas.getContext('2d');
 
 function generateStars(){
+    //clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    //limiting
+    if (starCount.value > 10000){
+        starCount.textContent = 10000;
+        starCount.value = 10000;
+    }
+    if (maxSize.value != "" && minSize.value > maxSize.value){
+        minSize.textContent = maxSize.textContent;
+        minSize.value = maxSize.value;
+    }
+    if (maxSize.value > 5){
+        maxSize.textContent = 5;
+        maxSize.value = 5
+    }
+
+    //rendering each star
     for (let i = 0; i < starCount.value; i++){
         ctx.beginPath();
 
@@ -51,6 +68,9 @@ generateStars();
 starCount.addEventListener("keyup", generateStars);
 minSize.addEventListener("keyup", generateStars);
 maxSize.addEventListener("keyup", generateStars);
+regenerateButton.addEventListener("click", ()=>{
+    generateStars();
+})
 
 //Settings
 menuButton.addEventListener("click", ()=>{
