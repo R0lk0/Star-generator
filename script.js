@@ -1,5 +1,11 @@
-var canvas = document.querySelector('canvas');
+const canvas = document.querySelector('canvas');
+const menuButton = document.getElementById('menuButton');
+const sidebar = document.getElementById('sidebar');
+const starCount = document.getElementById('starCount');
+const minSize = document.getElementById('minSize');
+const maxSize = document.getElementById('maxSize');
 
+//Star generation
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -23,14 +29,38 @@ function randomColor() {
 
 var ctx = canvas.getContext('2d');
 
-for (let i = 0; i < 2000; i++){
-    ctx.beginPath();
-    ctx.arc(getRandom(0, window.innerWidth),
-            getRandom(0, window.innerHeight),
-            getRandom(0.2, 2.5),
-            0,
-            Math.PI * 2,
-            false)
-    ctx.fillStyle = `${randomColor()}`;
-    ctx.fill();
+function generateStars(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < starCount.value; i++){
+        ctx.beginPath();
+
+        ctx.arc(getRandom(0, window.innerWidth),
+                getRandom(0, window.innerHeight),
+                getRandom(+minSize.value, +maxSize.value),
+                0,
+                Math.PI * 2,
+            );
+
+        ctx.fillStyle = randomColor();
+        ctx.fill();
+    }
 }
+
+generateStars();
+starCount.addEventListener("keyup", generateStars);
+minSize.addEventListener("keyup", generateStars);
+maxSize.addEventListener("keyup", generateStars);
+
+//Settings
+menuButton.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuButton.classList.toggle("open");
+
+    if (menuButton.classList.contains("open")){
+        menuButton.textContent = "<"
+    }
+    else{
+        menuButton.textContent = ">"
+    }
+})

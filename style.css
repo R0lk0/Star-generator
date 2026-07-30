@@ -1,0 +1,97 @@
+*{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+        canvas{
+            background-color: black;
+            display: block;
+        }
+        #menuButton{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            background-color: rgba(80, 80, 90, 0.65);
+            color: white;
+            transition: left 0.3s ease;
+        }
+        #menuButton:hover{
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 35px rgba(255, 255, 255, 0.3);
+            background-color: rgba(80, 80, 90, 0.8);
+            cursor: pointer;
+        }
+        #sidebar{
+            position: fixed;
+            top: 20px;
+            left: -320px;
+            width: 300px;
+            height: 45vh;
+            background-color: rgba(80, 80, 90, 0.65);
+            color: white;
+            border-radius: 20px;
+            backdrop-filter: blur(3px);
+            transition: left 0.3s ease;
+            z-index: 99;
+            text-align: center;
+        }
+        #sidebar.open{
+            left: 20px;
+        }
+        #sidebar:hover{
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 35px rgba(255, 255, 255, 0.3);
+        }
+        #menuButton.open{
+            left: 340px
+        }
+
+        #sidebar h2{
+            margin: 10px 0 30px;
+            font-size: 28px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
+            text-decoration: underline;
+        }
+        #sidebar label{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #ddd;
+        }
+        #sidebar input{
+            width: 75%;
+            margin: 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.12);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+        #minSize, #maxSize{
+            width: 30%;
+            display: inline-block;
+            margin-bottom: 15px !important;
+        }
+        .size.inputs{
+            display: flex;
+            gap: 10px;
+        }
