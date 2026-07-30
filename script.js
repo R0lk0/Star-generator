@@ -7,8 +7,12 @@ const maxSize = document.getElementById('maxSize');
 const regenerateButton = document.getElementById('regenerateButton');
 
 //Star generation
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    generateStars();
+}
 
 function getRandom(min, max) {
   return Math.random() * (max - min) + min;
@@ -29,6 +33,9 @@ function randomColor() {
 }
 
 var ctx = canvas.getContext('2d');
+let resizeTimeout;
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 function generateStars(){
     //clear canvas
@@ -42,10 +49,6 @@ function generateStars(){
     if (maxSize.value != "" && minSize.value > maxSize.value){
         minSize.textContent = maxSize.textContent;
         minSize.value = maxSize.value;
-    }
-    if (maxSize.value > 5){
-        maxSize.textContent = 5;
-        maxSize.value = 5
     }
 
     //rendering each star

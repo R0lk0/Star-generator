@@ -7,6 +7,9 @@
 canvas {
     background-color: black;
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 #menuButton {
     position: fixed;
@@ -36,7 +39,7 @@ canvas {
     top: 20px;
     left: -320px;
     width: 300px;
-    height: 50vh;
+    height: 420px;
     background-color: rgba(80, 80, 90, 0.65);
     color: white;
     border-radius: 20px;
